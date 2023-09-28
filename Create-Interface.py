@@ -1,4 +1,5 @@
 import ipaddress as ip
+import csv
 
 #Variables
 '''
@@ -8,6 +9,14 @@ import ipaddress as ip
 -Portchannel Interface ID
 -Description
 '''
+csvfile = open('newint.csv', 'r')
+reader = csv.DictReader(csvfile)
+list_net = list()
+
+for row in reader:
+    list_net.append(row)
+
+print(list_net)
 
 netinfo =[
     {
