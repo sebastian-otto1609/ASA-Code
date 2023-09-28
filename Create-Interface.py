@@ -5,6 +5,8 @@ import ipaddress as ip
 -VLAN ID
 -Networkaddress
 -Subnetmask
+-Portchannel Interface ID
+-Description
 '''
 
 netinfo =[
@@ -12,19 +14,25 @@ netinfo =[
         "vlanid":2487,
         "netaddr":ip.ip_address('21.196.134.0'),
         "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-ent'
+        "context":'bimaserverbn-ent',
+        "Portchannel":32,
+        "Description":'KIPE'
     },
     {
         "vlanid":2488,
         "netaddr":ip.ip_address('21.196.134.64'),
         "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-test'
+        "context":'bimaserverbn-test',
+        "Portchannel":31,
+        "Description":'KIPT'
     },
     {
         "vlanid":2489,
         "netaddr":ip.ip_address('21.196.134.128'),
         "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-prod'
+        "context":'bimaserverbn-prod',
+        "Portchannel":30,
+        "Description":'KIP'
     }
 ]
 
@@ -34,10 +42,12 @@ for net in netinfo:
     IP2 = str(ip.ip_address(net['netaddr']+2))
     MASK = str(net['smask'])
     CONT = net['context']
+    PoI = str(net['Portchannel'])
+    DSC = net['Description']
     print("change context system")
     print("configure terminal")
-    print("interface Port-channelXX." + ID)
-    print(" description XXX")
+    print("interface Port-channel" + PoI + "." + ID)
+    print(" description " + DSC)
     print(" vlan "+ ID)
     print("exit")
     print("write memory")
