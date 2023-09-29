@@ -9,21 +9,27 @@ import csv
 -Portchannel Interface ID
 -Description
 '''
-csvfile = open('newint.csv', 'r')
+#einlesen der CSV
+csvfile = open(
+    'newint.csv',
+     'r'
+    )
 reader = csv.DictReader(csvfile)
 list_net = list()
 
+#Überführen der CSV in ein Liste
 for row in reader:
     list_net.append(row)
 
-print(list_net)
-
+#Anpassung der IP Parameter in mit dem ipaddress Modul
 for row in list_net:
     row['netaddr']=ip.ip_address(row['netaddr'])
     row['smask']=ip.ip_address(row['smask'])
 
+#Übernahme der aktuellen Liste in eine andere Liste
 netinfo = list_net
 
+#Ausgabe der CLI Commands
 for net in netinfo:
     ID = str(net['vlanid'])
     IP1 = str(ip.ip_address(net['netaddr']+1))
