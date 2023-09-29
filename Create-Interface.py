@@ -18,32 +18,11 @@ for row in reader:
 
 print(list_net)
 
-netinfo =[
-    {
-        "vlanid":2487,
-        "netaddr":ip.ip_address('21.196.134.0'),
-        "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-ent',
-        "Portchannel":32,
-        "Description":'KIPE'
-    },
-    {
-        "vlanid":2488,
-        "netaddr":ip.ip_address('21.196.134.64'),
-        "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-test',
-        "Portchannel":31,
-        "Description":'KIPT'
-    },
-    {
-        "vlanid":2489,
-        "netaddr":ip.ip_address('21.196.134.128'),
-        "smask":ip.ip_address('255.255.255.192'),
-        "context":'bimaserverbn-prod',
-        "Portchannel":30,
-        "Description":'KIP'
-    }
-]
+for row in list_net:
+    row['netaddr']=ip.ip_address(row['netaddr'])
+    row['smask']=ip.ip_address(row['smask'])
+
+netinfo = list_net
 
 for net in netinfo:
     ID = str(net['vlanid'])
