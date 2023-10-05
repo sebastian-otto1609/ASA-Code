@@ -1,13 +1,14 @@
 import ipaddress as ip
 import csv
 
-#Variables
+#Variables for csv
 '''
--VLAN ID
--Networkaddress
--Subnetmask
--Portchannel Interface ID
--Description
+-VLAN ID = vlanid
+-Networkaddress = netaddr
+-Subnetmask = smask
+-Context = context
+-Portchannel Interface ID = Portchannel
+-Description = Description
 '''
 #einlesen der CSV
 csvfile = open(
@@ -43,6 +44,9 @@ for net in netinfo:
     print("interface Port-channel" + PoI + "." + ID)
     print(" description " + DSC)
     print(" vlan "+ ID)
+    print("exit")
+    print("context " + CONT)
+    print(" allocate-interface Port-channel" + PoI + "." + ID)
     print("exit")
     print("write memory")
     print("!")
