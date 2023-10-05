@@ -46,7 +46,7 @@ for net in netinfo:
     print(" vlan "+ ID)
     print("exit")
     print("context " + CONT)
-    print(" allocate-interface Port-channel" + PoI + "." + ID)
+    print(" allocate-interface Port-channel" + PoI + "." + ID + " inside_" + ID)
     print("exit")
     print("write memory")
     print("!")
