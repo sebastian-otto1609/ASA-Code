@@ -31,6 +31,8 @@ for row in list_net:
 netinfo = list_net
 
 #Ausgabe der CLI Commands
+print("change context system")
+print("configure terminal")
 for net in netinfo:
     ID = str(net['vlanid'])
     IP1 = str(ip.ip_address(net['netaddr']+1))
@@ -39,8 +41,6 @@ for net in netinfo:
     CONT = net['context']
     PoI = str(net['Portchannel'])
     DSC = net['Description']
-    print("change context system")
-    print("configure terminal")
     print("interface Port-channel" + PoI + "." + ID)
     print(" description " + DSC)
     print(" vlan "+ ID)
