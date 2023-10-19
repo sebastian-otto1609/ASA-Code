@@ -48,7 +48,6 @@ for net in netinfo:
     print("context " + CONT)
     print(" allocate-interface Port-channel" + PoI + "." + ID + " inside_" + ID)
 print("exit")
-print("write memory")
 print("!")
 ContCheck = ""
 for net in netinfo:
@@ -73,8 +72,8 @@ for net in netinfo:
         print("!")
         print("monitor-interface inside_" + ID)
         print("!")
-        print("write memory")
     else:
+        print("write memory")
         print("change context " + CONT)
         print("interface inside_" + ID)
         print(" nameif inside_" + ID)
@@ -91,5 +90,5 @@ for net in netinfo:
         print("!")
         print("monitor-interface inside_" + ID)
         print("!")
-        print("write memory")
     ContCheck = CONT
+print("write memory")
