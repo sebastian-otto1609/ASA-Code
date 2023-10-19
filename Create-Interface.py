@@ -35,10 +35,6 @@ print("change context system")
 print("configure terminal")
 for net in netinfo:
     ID = str(net['vlanid'])
-    IP1 = str(ip.ip_address(net['netaddr']+1))
-    IP2 = str(ip.ip_address(net['netaddr']+2))
-    MASK = str(net['smask'])
-    CONT = net['context']
     PoI = str(net['Portchannel'])
     DSC = net['Description']
     print("interface Port-channel" + PoI + "." + ID)
