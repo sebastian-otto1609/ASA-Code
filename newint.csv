@@ -1,4 +1,6 @@
 vlanid,netaddr,smask,context,Portchannel,Description
 2487,21.196.134.0,255.255.255.192,bimaserverbn-ent,32,KIPE
-2488,21.196.134.64,255.255.255.192,bimaserverbn-test,32,KIPT
-2489,21.196.134.128,255.255.255.192,bimaserverbn-prod,32,KIP
+2587,21.197.134.0,255.255.255.192,bimaserverbn-ent,32,KIPE
+2687,21.198.134.0,255.255.255.192,bimaserverbn-ent,32,KIPE
+2488,21.196.134.64,255.255.255.192,bimaserverbn-test,31,KIPT
+2489,21.196.134.128,255.255.255.192,bimaserverbn-prod,30,KIP
