@@ -44,12 +44,22 @@ for net in netinfo:
     print("interface Port-channel" + PoI + "." + ID)
     print(" description " + DSC)
     print(" vlan "+ ID)
-    print("exit")
+print("exit")
+for net in netinfo:
+    CONT = net['context']
+    PoI = str(net['Portchannel'])
+    ID = str(net['vlanid'])
     print("context " + CONT)
     print(" allocate-interface Port-channel" + PoI + "." + ID + " inside_" + ID)
-    print("exit")
-    print("write memory")
-    print("!")
+print("exit")
+print("write memory")
+print("!")
+for net in netinfo:
+    ID = str(net['vlanid'])
+    IP1 = str(ip.ip_address(net['netaddr']+1))
+    IP2 = str(ip.ip_address(net['netaddr']+2))
+    MASK = str(net['smask'])
+    CONT = net['context']
     print("change context " + CONT)
     print("interface inside_" + ID)
     print(" nameif inside_" + ID)
