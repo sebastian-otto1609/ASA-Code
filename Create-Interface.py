@@ -1,6 +1,13 @@
 import ipaddress as ip
 import csv
 
+'''
+Hilfe um Interfaces auf einer Cisco ASA
+im Multi Context Mode anzulegen.
+Die Daten der Interfaces werden in einer
+CSV Datei "newint.csv" an das Programm
+übergeben.
+'''
 #Variables for csv
 '''
 -VLAN ID = vlanid

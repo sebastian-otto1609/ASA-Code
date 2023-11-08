@@ -92,7 +92,8 @@ output_sh_ACLforSourceIPandDestinationPort = """
    access-list inside_3338_acl line 5 extended permit tcp 10.218.3.0 255.255.255.0 11.209.4.1 eq 443
    access-list inside_3338_acl line 5 extended permit tcp 10.218.3.0 255.255.255.0 11.209.4.2 eq 443
 """
-print(len(output_sh_ACLforSourceIP))
+print(len(output_sh_ACLforSourceIPandDestinationPort))
+print(output_sh_ACLforSourceIPandDestinationPort)
 
 len_of_output_sh_ACLforDestinationIP = len(output_sh_ACLforDestinationIP)
 len_of_output_sh_ACLforDestinationIPandDestinationPort = len(output_sh_ACLforDestinationIPandDestinationPort)
