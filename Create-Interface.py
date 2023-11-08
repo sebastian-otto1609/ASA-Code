@@ -38,7 +38,10 @@ for row in list_net:
 netinfo = list_net
 
 #User Abfrage
-q_IP = input("Highest or lowest IP for Interface? Type high or low: ")
+q_IP =""
+matches = ['high', 'low']
+while not any(x in q_IP for x in matches):
+    q_IP = input("Highest or lowest IP for Interface? Type high or low: ").lower()
 
 #Ausgabe der CLI Commands
 
