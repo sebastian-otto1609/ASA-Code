@@ -45,7 +45,9 @@ while not any(x in q_IP for x in matches):
     q_IP = input("Highest or lowest IP for Interface? Type high or low: ").lower()
 
 filename_conf= datetime.now().strftime("%Y_%m_%d-") + "commands.txt"
+command_list = []
 
+'''
 with open(filename_conf, 'w') as file:
     file.write("\n change context system")
     file.write("\n configure terminal")
@@ -115,3 +117,76 @@ with open(filename_conf, 'w') as file:
             file.write("\n !")
         ContCheck = CONT
     file.write("\n write memory")
+'''
+
+command_list.append("change context system")
+command_list.append("configure terminal")
+for net in netinfo:
+    ID = str(net['vlanid'])
+    PoI = str(net['Portchannel'])
+    DSC = net['Description']
+    command_list.append("interface Port-channel" + PoI + "." + ID)
+    command_list.append(" description " + DSC)
+    command_list.append(" vlan "+ ID)
+command_list.append("exit")
+for net in netinfo:
+    CONT = net['context']
+    PoI = str(net['Portchannel'])
+    ID = str(net['vlanid'])
+    command_list.append("context " + CONT)
+    command_list.append(" allocate-interface Port-channel" + PoI + "." + ID + " inside_" + ID)
+command_list.append("exit")
+command_list.append("!")
+ContCheck = ""
+for net in netinfo:
+    ID = str(net['vlanid'])
+    getnet = str(net['netaddr']) + "/" + str(net['smask'])
+    IP0 = ip.ip_network(getnet)
+    l_IP0 = list(IP0.hosts())
+    if q_IP =="low":
+        IP1 = str(l_IP0[0])
+        IP2 = str(l_IP0[1])
+    elif q_IP == "high":
+        IP1 = str(l_IP0[-1])
+        IP2 = str(l_IP0[-2])
+    MASK = str(net['smask'])
+    CONT = net['context']
+    if ContCheck == CONT:
+        command_list.append("interface inside_" + ID)
+        command_list.append(" nameif inside_" + ID)
+        command_list.append(" security-level 100")
+        command_list.append(" ip address " + IP1 + " " + MASK + " standby " + IP2)
+        command_list.append(" exit")
+        command_list.append("!")
+        command_list.append("access-list inside_" + ID + "_acl extended deny icmp any4 any4 redirect")
+        command_list.append("access-list inside_" + ID + "_acl extended permit icmp any4 any4")
+        command_list.append("access-list inside_" + ID + "_acl remark initial rule, please delete it as soon as possible!")
+        command_list.append("access-list inside_" + ID + "_acl extended permit ip any4 any4")
+        command_list.append("access-list inside_" + ID + "_acl extended deny ip any4 any4")
+        command_list.append("access-group inside_" + ID + "_acl in interface inside_" + ID)
+        command_list.append("!")
+        command_list.append("monitor-interface inside_" + ID)
+        command_list.append("!")
+    else:
+        command_list.append("write memory")
+        command_list.append("change context " + CONT)
+        command_list.append("interface inside_" + ID)
+        command_list.append(" nameif inside_" + ID)
+        command_list.append(" security-level 100")
+        command_list.append(" ip address " + IP1 + " " + MASK + " standby " + IP2)
+        command_list.append(" exit")
+        command_list.append("!")
+        command_list.append("access-list inside_" + ID + "_acl extended deny icmp any4 any4 redirect")
+        command_list.append("access-list inside_" + ID + "_acl extended permit icmp any4 any4")
+        command_list.append("access-list inside_" + ID + "_acl remark initial rule, please delete it as soon as possible!")
+        command_list.append("access-list inside_" + ID + "_acl extended permit ip any4 any4")
+        command_list.append("access-list inside_" + ID + "_acl extended deny ip any4 any4")
+        command_list.append("access-group inside_" + ID + "_acl in interface inside_" + ID)
+        command_list.append("!")
+        command_list.append("monitor-interface inside_" + ID)
+        command_list.append("!")
+    ContCheck = CONT
+command_list.append("write memory")
+
+with open(filename_conf, 'w') as file:
+	file.write('\n'.join(command_list))
